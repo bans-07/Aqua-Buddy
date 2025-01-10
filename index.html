@@ -6,6 +6,40 @@
     <title>Document</title>
 </head>
 <body>
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>  
+    <div id="myPlot" style="width:100%;max-width:700px"></div>
+
+<script>
+const xArray = ["Hydration Goal", "Hydration Progress"];
+const yArray = [0, 100];
+
+const layout = {title:"Daily Water Intake"};
+
+const data = [{labels:xArray, values:yArray, type:"pie"}];
+
+Plotly.newPlot("myPlot", data, layout);
+</script>
+
+</body>
+</html>
 </body>
 </html>
