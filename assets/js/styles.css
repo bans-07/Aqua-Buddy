@@ -1,0 +1,75 @@
+h1{
+    font-size: 50px;
+    color: black;
+    text-align: center;
+    font-weight: bolder;
+    background-image: linear-gradient(#89CFF0, white);
+    height: 100px;
+    margin: auto;
+    padding-top: 30px;
+}
+
+.cap{
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 60px;
+    background-color: #89CFF0;
+    margin: auto;
+    border: 5px solid black;
+    display: flex;
+    border-radius: 15%;
+}
+
+.bottle{
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    width: 200px;
+    border: 5px solid black;
+    display: flex;
+    border-radius: 75px 75px 50px 50px;
+    margin: auto;
+    background: url(water.png);
+    background-size: 400px 500px;
+    background-repeat: repeat-x;
+    animation: flow 15s linear infinite;
+    /* Adjusts itself based on the user input */
+    /* 400px = empty; -50px= full */
+    background-position-y: 200px;
+}
+
+.input{
+    display:flex;
+    margin-top: 50px;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.input-buttons{
+    display:flex;
+    margin-top: 30px;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;  
+}
+
+.comment{
+    display:flex;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;  
+}
+
+@keyframes flow{
+    0% {
+        background-position-x: -1200px;
+    }
+    100% {
+        background-position-x: 0px;
+    }
+
+}
+
