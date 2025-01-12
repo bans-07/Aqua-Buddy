@@ -8,6 +8,7 @@
     <title>Document</title>
 </head>
 <body>
+
     <!--Will update the name based off of what the user inputs in local storage-->
     <h1>Welcome name!</h1>
     <div class="cap"></div>
@@ -35,5 +36,43 @@
        
     
     <script src="script.js"></script>
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>  
+    <div id="myPlot" style="width:100%;max-width:700px"></div>
+
+<script>
+const xArray = ["Hydration Goal", "Hydration Progress"];
+const yArray = [0, 100];
+
+const layout = {title:"Daily Water Intake"};
+
+const data = [{labels:xArray, values:yArray, type:"pie"}];
+
+Plotly.newPlot("myPlot", data, layout);
+</script>
+
+    <!--Testing CSS using button-->
+    <button type="button" class="btn btn-primary">Primary</button>
+
 </body>
 </html>
