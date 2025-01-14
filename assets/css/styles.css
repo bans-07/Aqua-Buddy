@@ -30,7 +30,7 @@ h1{
     display: flex;
     border-radius: 75px 75px 50px 50px;
     margin: auto;
-    background: url(water.png);
+    background: url(../images/water.png);
     background-size: 400px 500px;
     background-repeat: repeat-x;
     animation: flow 15s linear infinite;
