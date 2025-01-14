@@ -1,75 +1,101 @@
-h1{
-    font-size: 50px;
-    color: black;
+body {
+    font-family: Arial, sans-serif;
     text-align: center;
-    font-weight: bolder;
-    background-image: linear-gradient(#89CFF0, white);
-    height: 100px;
-    margin: auto;
-    padding-top: 30px;
-}
-
-.cap{
-    align-items: center;
-    justify-content: center;
-    height: 30px;
-    width: 60px;
-    background-color: #89CFF0;
-    margin: auto;
-    border: 5px solid black;
-    display: flex;
-    border-radius: 15%;
-}
-
-.bottle{
-    align-items: center;
-    justify-content: center;
-    height: 400px;
-    width: 200px;
-    border: 5px solid black;
-    display: flex;
-    border-radius: 75px 75px 50px 50px;
-    margin: auto;
-    background: url(water.png);
-    background-size: 400px 500px;
-    background-repeat: repeat-x;
-    animation: flow 15s linear infinite;
-    /* Adjusts itself based on the user input */
-    /* 400px = empty; -50px= full */
-    background-position-y: 200px;
-}
-
-.input{
-    display:flex;
     margin-top: 50px;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
+    background: linear-gradient(to bottom, #f0f8ff, #e0ffff);
+    color: #333;
 }
 
-.input-buttons{
-    display:flex;
-    margin-top: 30px;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;  
+.bottle-container {
+    position: relative;
+    width: 120px;
+    height: 350px;
+    margin: 0 auto;
+    border: 3px solid #000;
+    border-radius: 20px 20px 10px 10px;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #ffffff, #dcdcdc);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.comment{
-    display:flex;
-    margin-top: 10px;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;  
+.bottle-neck {
+    position: relative;
+    width: 60px;
+    height: 40px;
+    margin: 0 auto;
+    background: #dcdcdc;
+    border: 3px solid #000;
+    border-radius: 10px 10px 0 0;
 }
 
-@keyframes flow{
+.water {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    background: linear-gradient(to top, #0077cc, #00aaff);
+    border-top: 2px solid #005f99;
+    transition: height 0.5s ease;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    width: 200%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: wave-animation 4s infinite linear;
+}
+
+#wave1 {
+    left: -100%;
+    animation-delay: 0s;
+}
+
+#wave2 {
+    left: -100%;
+    animation-delay: 2s;
+}
+
+@keyframes wave-animation {
     0% {
-        background-position-x: -1200px;
+        transform: translateX(0);
     }
     100% {
-        background-position-x: 0px;
+        transform: translateX(100%);
     }
-
 }
 
+.label {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+input[type="number"] {
+    padding: 10px;
+    font-size: 16px;
+    width: 120px;
+    border: 2px solid #0077cc;
+    border-radius: 5px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-left: 10px;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #005f99;
+}
