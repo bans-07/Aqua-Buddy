@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/aqua-buddy login.css">
+    <title>Aqua Buddy Login</title>
+  </head>
+
+  <body>
+    <div class="hero">
+      <img
+        src="https://images.unsplash.com/photo-1622245179756-0a48d6f3465d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODB8fHdhdGVyJTIwYm90dGxlfGVufDB8fDB8fHwy"
+        alt="Person holding metal water bottle, filling it from a water tap"
+      />
+    </div>
+
+    <div class="main">
+      <h1>Aqua Buddy</h1>
+      <h4>Tracking Your Daily Water Intake</h4>    
+      <h3>Login to Proceed</h3>
+
+     <!--Form for user to enter their username and password. With error messaging for incorrect info.-->
+      <form id="login-form">
+        <label for="username"> Username: </label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Enter your Username"
+          required
+        />
+        <div id="username-error" class="error-message"></div>
+
+        <label for="password"> Password: </label>
+
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter your Password"
+          required
+        />
+        <div id="password-error" class="error-message"></div>
+       
+        <!--Submit and Reset Buttons-->
+        <div id="button-container">
+          <button type="submit" id="submit-button">Submit</button>
+          <button type="reset" id="reset-button">Reset</button>
+        </div>
+      </form>
+      <!--Javascript page-->
+      <script src="assets/aqua-buddy login.js"></script>
+    </div>
+  </body>
+</html>
