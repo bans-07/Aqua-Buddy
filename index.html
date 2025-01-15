@@ -8,10 +8,21 @@
     <title>Document</title>
 </head>
  <!--Will update the name based off of what the user inputs in local storage-->
+
+<body>
+ <h1>Welcome Name !</h1>
+
+    <div class="bottle-neck">
+    </div>
+=======
  <body>
     <h1>Welcome, <span id="username">Aqua Buddy</span>!</h1>
     <div class="bottle-neck"></div>
+
     <div class="bottle-container">
+        <div class="increment-25">25%-</div>
+        <div class="increment-50">50%-</div>
+        <div class="increment-75">75%-</div>
         <div class="water" id="water">
             <div class="wave" id="wave1"></div>
             <div class="wave" id="wave2"></div>
@@ -21,9 +32,18 @@
     <div class="label">
         Add Water (ml):
     </div>
-    <input type="number" id="waterInput" min="0" max="1000" step="50" placeholder="ml">
-    <button onclick="addWater()">Add</button>
-
+    <div class="water-input">
+        <input type="number" id="waterInput" min="0" max="1000" step="50" placeholder="ml">
+        <button onclick="addWater()">Add</button>
+        <button onclick="">Reset</button>    
+    </div>
+    <div>
+        <ul id="water-log-list">Water Log:</ul>
+    </div>
+    
+    
     <script src="assets/js/script.js"></script>
 </body>
-</html>
+
+
+
