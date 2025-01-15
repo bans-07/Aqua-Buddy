@@ -101,11 +101,13 @@ renderWaterLog();
 //Retrieve username from localStorage
 const username = localStorage.getItem('username');
 
-// If a username is stored, display it, otherwise the default "Aqua Buddy" will display instead
+// Display custom welcome message
+const welcomemessageElement = document.getElementById("welcomemessage");
 if (username) {
-    document.getElementById('username').textContent = username;
+  welcomemessageElement.textContent = 'Welcome, ${username}!';
+} else {
+  welcomemessageElement.textContent = "Welcome, Aqua Buddy!";
 }
-      }
   
       const newHeight = currentHeight + (input / 1000) * maxHeight;
   
