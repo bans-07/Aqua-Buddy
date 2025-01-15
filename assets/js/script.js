@@ -23,3 +23,11 @@ function addWater() {
 
     input.value = ''; // Clear the input field
 }
+
+//Retrieve username from localStorage
+const username = localStorage.getItem('username');
+
+// If a username is stored, display it, otherwise the default "Aqua Buddy" will display instead
+if (username) {
+    document.getElementById('username').textContent = username;
+}
