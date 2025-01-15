@@ -28,6 +28,19 @@ body {
     border-radius: 10px 10px 0 0;
 }
 
+
+
+.water {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    background: linear-gradient(to top, #0077cc, #00aaff);
+    border-top: 2px solid #005f99;
+    transition: height 0.5s ease;
+}
+
 .wave {
     position: absolute;
     bottom: 0;
