@@ -1,13 +1,13 @@
-let redirectURL = '';
+let redirectURL = "";
 
 const redirectPage = function (url) {
-    redirectURL = url;
-    location.assign(url);
-    };
-    
-document.getElementById("submit-button")
-document.addEventListener("click", function (event) {
-   
+  redirectURL = url;
+  location.assign(url);
+};
+
+document
+  .getElementById("submit-button")
+  .addEventListener("click", function (event) {
     event.preventDefault();
 
     // login functions
@@ -30,6 +30,7 @@ document.addEventListener("click", function (event) {
 
     // If both fields are filled, redirect to the main page.
     if (username !== "" && password !== "") {
-      redirectPage('index.html');  //needs to be updated to correct path when ready. You can use your relative path to the file to use it currently.
+      localStorage.setItem("username", username);
+      redirectPage("index.html"); //needs to be updated to correct path when ready. You can use your relative path to the file to use it currently.
     }
   });

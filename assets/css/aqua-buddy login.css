@@ -6,22 +6,25 @@ body {
   line-height: 1.5;
   min-height: 100vh;
   background: #d8ebf1;
-  flex-direction: column;
   margin: 0;
   padding: 0;
 }
 
 .hero {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 30vh;
+  height: 100%;
+  background: url("https://images.pexels.com/photos/327090/pexels-photo-327090.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
+    no-repeat center center/cover;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
 }
 
 .main {
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 15px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   padding: 20px;
@@ -29,7 +32,6 @@ body {
   width: 100%;
   max-width: 400px;
   text-align: center;
-  margin: 10px auto;
 }
 
 h1 {
@@ -39,7 +41,6 @@ h1 {
 
 h4 {
   font-size: 16px;
- ;
 }
 form {
   display: flex;
@@ -92,7 +93,10 @@ input:focus {
 #button-container button:hover {
   background-color: #6592d6;
 }
-
+.error-message {
+  color: red;
+  font-size: 12px;
+}
 /* Responsiveness for different screen sizes. */
 @media screen and (max-width: 575px) {
   .main {
