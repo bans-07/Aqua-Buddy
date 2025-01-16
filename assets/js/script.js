@@ -54,13 +54,16 @@ function renderWaterLog() {
 
     waterLog.forEach((log, index) => {
         const li = document.createElement("li");
-        li.textContent = `${log.volume} ml`;
+        const p = document.createElement("p")
+        p.textContent= `${log.volume} ml`;
+        li.classList.add("list-item")
 
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete";
         deleteButton.onclick = () => deleteLog(index);
 
-        li.appendChild(deleteButton);
+        li.appendChild(p);
+        li.appendChild(deleteButton)
         logList.appendChild(li);
     });
 }

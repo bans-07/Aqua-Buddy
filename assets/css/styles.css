@@ -144,3 +144,20 @@ button:hover {
     background-color: #e0ffff;
     color: black;
 }
+
+.water-log{
+    display: block;
+    align-items: center;
+    margin: auto;
+    padding: 20px;
+    gap: 50px;
+}
+
+.list-item{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin: 20px;
+    gap: 20px;
+    border: #000 20px;
+}
