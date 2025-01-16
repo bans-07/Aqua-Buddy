@@ -140,7 +140,7 @@ button:hover {
     gap: 20px;
 }
 
-#water-log-list{
+#water-log-list li {
     background-color: #e0ffff;
     color: black;
 }
