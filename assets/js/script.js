@@ -28,7 +28,7 @@ return;
 function renderGoal() {
   let goal = localStorage.getItem("water-goal");
   if (goal === null) {
-    goal = 0;
+    goal = 1000;
     localStorage.setItem("water-goal", goal);
   }
   const goalText = document.getElementById("goal-text");
