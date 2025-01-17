@@ -31,6 +31,6 @@ document
     // If both fields are filled, redirect to the main page.
     if (username !== "" && password !== "") {
       localStorage.setItem("username", username);
-      redirectPage("index.html"); //needs to be updated to correct path when ready. You can use your relative path to the file to use it currently.
+      redirectPage("homepage.html"); //needs to be updated to correct path when ready. You can use your relative path to the file to use it currently.
     }
   });
