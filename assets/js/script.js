@@ -210,6 +210,9 @@ function deleteDataPoint(index) {
   waterChart.data.datasets[0].data.splice(index, 1);
   waterChart.data.datasets[1].data.splice(index, 1);
   waterChart.update();
+  let waterData = JSON.parse(localStorage.getItem('waterData')) || [];
+  waterData.splice(index, 1);
+  localStorage.setItem('waterData', JSON.stringify(waterData));
 }
 
 
