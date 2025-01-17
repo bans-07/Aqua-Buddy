@@ -148,6 +148,11 @@ button:hover {
     gap: 20px;
 }
 
+
+#water-log-list li {
+    background-color: #e0ffff;
+    color: black;
+=======
 .water-log{
     display: block;
     align-items: center;
@@ -209,4 +214,5 @@ ul p{
     text-align: center;
     font-size: 30px;
     margin-top: 20px;
+
 }

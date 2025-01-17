@@ -218,6 +218,7 @@ function resetChart() {
 
 // Call loadWaterData when the page loads
 window.onload = loadWaterData;
+
 // Update water element when the page loads
 window.onload = () => {
   loadWaterData();
@@ -227,6 +228,25 @@ window.onload = () => {
   waterElement.style.height = waterHeight + "%";
   renderWaterLog();
 };
+
+
+function resetWater() {
+    if (waterLog.length === 0) {
+        alert("No entries to remove.");
+        return;
+    }
+
+    const lastEntry = waterLog.pop();
+    currentLevel -= lastEntry.volume;
+    if (currentLevel < 0) currentLevel = 0;
+
+    localStorage.setItem("waterLog", JSON.stringify(waterLog));
+
+    const waterHeight = (currentLevel / maxCapacity) * 100;
+    waterElement.style.height = waterHeight + "%";
+
+    renderWaterLog();
+}
 
 // Function to calculate the user's progress
 function calculateProgress() {
@@ -258,5 +278,6 @@ calculateProgress();
 
 //Initializes goal text
 renderGoal()
+
 
 
