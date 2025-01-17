@@ -16,7 +16,7 @@ if (isNaN(goal) || goal === ""){
 }
 localStorage.setItem("water-goal", goal);
 const goalText = document.getElementById("goal-text");
-goalText.textContent = `Your current goal is ${goal} mLs.`
+// goalText.textContent = `Your current goal is ${goal} mLs of water per day.`
 maxCapacity = goal;
 
 // Update chart's y-axis max value
