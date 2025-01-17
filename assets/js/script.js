@@ -2,8 +2,28 @@
 const waterElement = document.getElementById("water");
 const waterInput = document.getElementById("waterInput");
 const logList = document.getElementById("water-log-list");
-const maxCapacity = 1000; // Max capacity in ml
+const statusText = document.getElementById("statusText") // Updates based off of if user is meeting goal
+let maxCapacity = 1000; // Max capacity in ml
 let currentLevel = 0; // Current water level in ml
+
+//Function to update goal
+function updateGoal(){
+const goal = document.getElementById("water-goal").value;
+if (isNaN(goal) || goal === ""){
+  alert("Please enter a number for your goal in mLs.");
+  return;
+}
+localStorage.setItem("water-goal", goal);
+const goalText = document.getElementById("goal-text");
+goalText.textContent = `Your current goal is ${goal} mLs.`
+maxCapacity = goal;
+}
+
+function renderGoal() {
+  const goal = localStorage.getItem("water-goal");
+  const goalText = document.getElementById("goal-text");
+  goalText.textContent = `Your current goal is ${goal} mLs of water per day.`;
+}
 
 // Retrieve water log and username from localStorage
 let waterLog = JSON.parse(localStorage.getItem("waterLog")) || [];
@@ -18,9 +38,10 @@ function addWaterToLog(amountToAdd) {
   }
 
   currentLevel += amountToAdd;
+  localStorage.setItem("currentLevel", JSON.stringify(currentLevel));
   if (currentLevel > maxCapacity) {
     currentLevel = maxCapacity;
-    alert("The bottle is full!");
+    alert("The bottle is full! Great Job!");
   }
 
   // Update water log
@@ -48,16 +69,20 @@ function resetWater() {
 
 // Function to render water log
 function renderWaterLog() {
-  logList.innerHTML = "Water Log:"; // Reset list
+  logList.innerHTML = ""; // Reset list
 
   waterLog.forEach((log, index) => {
     const li = document.createElement("li");
-    li.textContent = `${log.volume} ml`;
+    const p = document.createElement("p")
+    p.textContent = `${log.volume} ml`;
+    li.classList.add("list-item")
 
     const deleteButton = document.createElement("button");
+    deleteButton.classList.add("delete-button")
     deleteButton.textContent = "Delete";
     deleteButton.onclick = () => deleteLog(index);
 
+    li.appendChild(p);
     li.appendChild(deleteButton);
     logList.appendChild(li);
   });
@@ -65,9 +90,30 @@ function renderWaterLog() {
 
 // Function to delete a log entry
 function deleteLog(index) {
+  //Adjust current water level height in bottle
+  const amountToSubtract = waterLog[index].volume;
+  currentLevel = currentLevel - amountToSubtract;
+  const waterHeight = (currentLevel / maxCapacity) * 100; // Convert to percentage
+  waterElement.style.height = waterHeight + "%";
+  //Retrieve local storage data for water log and delete entry
+  localStorage.getItem("waterLog");
   waterLog.splice(index, 1);
   localStorage.setItem("waterLog", JSON.stringify(waterLog));
   renderWaterLog();
+  //Retrieve local storage data for water level and subtract 
+  let level = parseFloat(localStorage.getItem("currentLevel"));
+  level -= amountToSubtract;
+  localStorage.setItem("currentLevel", currentLevel);
+  
+  localStorage.setItem("waterLog", JSON.stringify(waterLog));
+  //Retrieve local storage data for graph and delete entry
+  /*
+  let waterData = JSON.parse(localStorage.getItem("waterData"));
+  waterData.splice(index,1);
+  localStorage.setItem("waterData", JSON.stringify(waterData) );
+  */
+
+  calculateProgress();
 }
 
 // Initial render of water log
@@ -141,6 +187,9 @@ function addWater() {
 
     // Update water element and log
     addWaterToLog(waterAmount);
+
+    //Calculate progress
+    calculateProgress();
   }
 }
 
@@ -164,6 +213,7 @@ function resetChart() {
   waterChart.data.datasets[1].data = [];
   waterChart.update();
   localStorage.removeItem('waterData');
+  calculateProgress()
 }
 
 // Call loadWaterData when the page loads
@@ -177,3 +227,36 @@ window.onload = () => {
   waterElement.style.height = waterHeight + "%";
   renderWaterLog();
 };
+
+// Function to calculate the user's progress
+function calculateProgress() {
+  const now = new Date();
+  const currentHour = now.getHours();
+  const elapsedHours = Math.max(currentHour, 1); // Ensures at least 1 hour is counted
+
+  // Determine the target water intake at that point in the day
+  const targetIntake = (maxCapacity / 24) * elapsedHours;
+
+  // Retrieve current level from localStorage, ensuring it's a number
+  let level = parseFloat(localStorage.getItem("currentLevel")) || 0;
+
+  // Update status text
+  if (level >= maxCapacity) {
+    statusText.textContent = "🎉 You've met your daily water goal! Great job today!";
+    statusText.style.color = "green";
+  } else if (level >= targetIntake) {
+    statusText.textContent = "👍 You're on track to meet your goal!";
+    statusText.style.color = "blue";
+  } else {
+    statusText.textContent = "😅 You're falling behind. Drink more water!";
+    statusText.style.color = "red";
+  }
+}
+
+// Initializes progress text
+calculateProgress();
+
+//Initializes goal text
+renderGoal()
+
+
