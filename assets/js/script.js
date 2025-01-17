@@ -6,6 +6,7 @@ const statusText = document.getElementById("statusText") // Updates based off of
 let maxCapacity = 1000; // Max capacity in ml
 let currentLevel = 0; // Current water level in ml
 
+
 //Function to update goal
 function updateGoal(){
 const goal = document.getElementById("water-goal").value;
@@ -17,6 +18,11 @@ localStorage.setItem("water-goal", goal);
 const goalText = document.getElementById("goal-text");
 goalText.textContent = `Your current goal is ${goal} mLs.`
 maxCapacity = goal;
+
+// Update chart's y-axis max value
+waterChart.options.scales.y.max = parseInt(maxCapacity, 10);
+waterChart.update();
+return;
 }
 
 function renderGoal() {
@@ -104,6 +110,9 @@ function deleteLog(index) {
   let level = parseFloat(localStorage.getItem("currentLevel"));
   level -= amountToSubtract;
   localStorage.setItem("currentLevel", currentLevel);
+
+  //Delete the related data point from the chart
+  deleteDataPoint(index);
   
   localStorage.setItem("waterLog", JSON.stringify(waterLog));
   //Retrieve local storage data for graph and delete entry
@@ -113,6 +122,7 @@ function deleteLog(index) {
   localStorage.setItem("waterData", JSON.stringify(waterData) );
   */
 
+  renderWaterLog();
   calculateProgress();
 }
 
@@ -123,10 +133,10 @@ const ctx = document.getElementById('waterChart').getContext('2d');
 const waterChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: [], // Time labels will be added dynamically
+    labels: [],
     datasets: [{
       label: 'Water Intake (ml)',
-      data: [], // Data points will be added dynamically
+      data: [],
       borderColor: 'rgba(75, 192, 192, 1)',
       borderWidth: 1,
       fill: false
@@ -155,7 +165,7 @@ const waterChart = new Chart(ctx, {
       y: {
         beginAtZero: true,
         min: 0,
-        max: 1000,
+        max: maxCapacity,
         title: {
           display: true,
           text: 'Water Intake (ml)'
@@ -164,6 +174,7 @@ const waterChart = new Chart(ctx, {
     }
   }
 });
+
 
 function addWater() {
   const waterAmount = parseInt(waterInput.value);
@@ -180,7 +191,7 @@ function addWater() {
 
     waterChart.update();
     
-    // Save the data to local storage
+    // Save to local storage
     let waterData = JSON.parse(localStorage.getItem('waterData')) || [];
     waterData.push({ time: currentTime, amount: waterAmount });
     localStorage.setItem('waterData', JSON.stringify(waterData));
@@ -192,6 +203,15 @@ function addWater() {
     calculateProgress();
   }
 }
+
+// Function to delete a data point from the chart
+function deleteDataPoint(index) {
+  waterChart.data.labels.splice(index, 1);
+  waterChart.data.datasets[0].data.splice(index, 1);
+  waterChart.data.datasets[1].data.splice(index, 1);
+  waterChart.update();
+}
+
 
 // Load data from local storage and update the chart
 function loadWaterData() {
@@ -216,9 +236,6 @@ function resetChart() {
   calculateProgress()
 }
 
-// Call loadWaterData when the page loads
-window.onload = loadWaterData;
-
 // Update water element when the page loads
 window.onload = () => {
   loadWaterData();
@@ -227,6 +244,13 @@ window.onload = () => {
   const waterHeight = (currentLevel / maxCapacity) * 100;
   waterElement.style.height = waterHeight + "%";
   renderWaterLog();
+
+  const savedGoal = localStorage.getItem("water-goal");
+  if (savedGoal) {
+    maxCapacity = parseInt(savedGoal, 10);
+    waterChart.options.scales.y.max = maxCapacity;
+    waterChart.update();
+  }
 };
 
 
@@ -277,7 +301,6 @@ function calculateProgress() {
 calculateProgress();
 
 //Initializes goal text
-renderGoal()
-
+renderGoal();
 
 

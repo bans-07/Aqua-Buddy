@@ -97,13 +97,14 @@ button {
     padding: 10px 20px;
     font-size: 16px;
     margin-left: 10px;
-    background-color: #0077cc;
+    background-color: #154da1;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
+    border-radius: 10px;
 }
 
 button:hover {
@@ -152,7 +153,8 @@ button:hover {
 #water-log-list li {
     background-color: #e0ffff;
     color: black;
-=======
+}
+
 .water-log{
     display: block;
     align-items: center;
