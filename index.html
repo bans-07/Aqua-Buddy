@@ -11,7 +11,13 @@
 
 <body>
 
-    <h1>Welcome, <span id="username">Aqua Buddy</span>!</h1>
+    <h1>Welcome, <span id="username">AquaBuddy</span>!</h1>
+    <div id="goal">
+        <input class="goal-input" id= "water-goal" type="text" placeholder="What is your water intake goal (in mL)?">
+        <button onclick=updateGoal()>Apply</button>
+    </div>
+    <p id="goal-text"> </p>
+    
     <div class="bottle-neck"></div>
 
     <div class="bottle-container">
@@ -23,7 +29,7 @@
             <div class="wave" id="wave2"></div>
         </div>
     </div>
-
+    <div id="statusText"></div>
     <div class="label">
         Add Water (ml):
     </div>
@@ -33,8 +39,10 @@
         <button onclick="resetWater(), resetChart()">Reset</button> 
     </div>
     <div>
-        <ul id="water-log-list">Water Log:</ul>
+        <h2 class= "log-header">Water Log:</h2>
+        <ul id="water-log-list"></ul>
     </div>
+    
     
     
         <canvas id="waterChart" width="400" height="200"></canvas>
