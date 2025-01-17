@@ -16,7 +16,7 @@ if (isNaN(goal) || goal === ""){
 }
 localStorage.setItem("water-goal", goal);
 const goalText = document.getElementById("goal-text");
-// goalText.textContent = `Your current goal is ${goal} mLs of water per day.`
+goalText.textContent = `Your current goal is ${goal} mLs of water per day.`
 maxCapacity = goal;
 
 // Update chart's y-axis max value
@@ -30,9 +30,10 @@ function renderGoal() {
   if (goal === null) {
     goal = 0;
     localStorage.setItem("water-goal", goal);
-  }
-  const goalText = document.getElementById("goal-text");
-  goalText.textContent = `Your current goal is ${goal} mLs of water per day.`;
+  } 
+    const goalText = document.getElementById("goal-text");
+    goalText.textContent = `Your current goal is ${goal} mLs of water per day.`; 
+  
 }
 
 // Retrieve water log and username from localStorage
@@ -70,11 +71,13 @@ function addWaterToLog(amountToAdd) {
 
 // Function to reset water level and log
 function resetWater() {
-  currentLevel = 0;
-  waterLog = [];
-  localStorage.removeItem("waterLog");
+  // Retrieve the water log array
+  let log = JSON.parse(localStorage.getItem("waterLog")) || [];
+  log = [];
+  localStorage.setItem("waterLog", JSON.stringify(log));
   waterElement.style.height = "0";
   renderWaterLog();
+  calculateProgress();
 }
 
 // Function to render water log
@@ -275,8 +278,14 @@ function resetWater() {
 
     const waterHeight = (currentLevel / maxCapacity) * 100;
     waterElement.style.height = waterHeight + "%";
-
+    
+    //Resets currentLevel to zero
+    localStorage.setItem("currentLevel", 0)
+    
     renderWaterLog();
+    calculateProgress();
+    
+
 }
 
 // Function to calculate the user's progress
@@ -290,9 +299,10 @@ function calculateProgress() {
 
   // Retrieve current level from localStorage, ensuring it's a number
   let level = parseFloat(localStorage.getItem("currentLevel")) || 0;
+  let goal = parseFloat(localStorage.getItem("water-goal"))
 
   // Update status text
-  if (level >= maxCapacity) {
+  if (level >= goal) {
     statusText.textContent = "🎉 You've met your daily water goal! Great job today!";
     statusText.style.color = "green";
   } else if (level >= targetIntake) {
@@ -300,14 +310,11 @@ function calculateProgress() {
     statusText.style.color = "blue";
   } else {
     statusText.textContent = "😅 You're falling behind. Drink more water!";
-    statusText.style.color = "red";
+    statusText.style.color = "#800020";
   }
 }
 
 // Initializes progress text
 calculateProgress();
-
-//Initializes goal text
-renderGoal();
 
 
